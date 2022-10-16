@@ -1,0 +1,39 @@
+.article_display {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border: 1px solid #040F0F;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.article_title {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.article_info {
+    font-size: 0.9em;
+    display: flex;
+}
+
+.article_read_time {
+    color: #57737A;
+}
+
+.article_hero {
+    min-height: 90px;
+}
+
+.main_body {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+@media screen and (min-width: 768px) {
+    .main_body {
+        padding-left: 15vw;
+        padding-right: 15vw;
+      }
+}

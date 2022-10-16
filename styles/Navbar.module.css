@@ -1,0 +1,42 @@
+.navbar {
+    background-color: #040F0F;
+    color: #C2FCF7;
+    display: flex;
+    margin-bottom: 0;
+    position: fixed;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    z-index: 1;
+    right: 0;
+    left: 0;
+    top: 0;
+}
+
+.nav_left {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+}
+
+.spacer {
+    flex-grow: 1;
+}
+
+.button {
+    margin: 10px;
+    background-color: #C2FCF7;
+    width: 30px;
+    height: 30px;
+    border-radius: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.name {
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: larger;
+    padding-right: 10px;
+}
