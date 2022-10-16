@@ -8,7 +8,7 @@ export default function Navbar({ item }) {
             <div className={styles.nav_left}>
                 <Link href={"/"}>
                     <div className={styles.button}>
-                        <Image src="/../public/icons8-bbb-50.png" alt="Logo - Bbb Icon" width={25} height={25} />
+                        <Image src="/../public/icon.png" alt="Logo - Bbb Icon" width={25} height={25} />
                     </div>
                 </Link>
                 <Link href={item.link}>
