@@ -11,11 +11,12 @@
 .article_title {
     font-weight: bold;
     font-size: 1.2em;
+    margin: 7.5px;
 }
 
 .article_info {
     font-size: 0.9em;
-    display: flex;
+    margin: 7.5px
 }
 
 .article_read_time {

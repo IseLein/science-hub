@@ -6,6 +6,8 @@ import styles from "../styles/Home.module.css";
 import dbConnect from "../util/dbConnect";
 import Blog from "../models/Blog";
 import Link from "next/link";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleDown, faCircleArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 export async function getStaticProps() {
   try {
@@ -38,10 +40,12 @@ export default function Home({ articles }) {
       </div>
       <div className={styles.main_body}>
         <div className={styles.recent}>
-          <div className={styles.main_head}>RECENT POSTS</div>
+          <div className={styles.main_head}>RECENT POSTS <FontAwesomeIcon icon={faAngleDown} /> </div>
           <Recent articles={articles} />
           <div className={styles.main_bottom}>
-            <Link href={"/articles"}>SEE ALL</Link>
+            <Link href={"/articles"}>
+              <span>SEE ALL POSTS <FontAwesomeIcon icon={faCircleArrowRight} /></span>
+            </Link>
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import logo from "../public/icon.png";
 import styles from "../styles/Navbar.module.css";
 
 export default function Navbar({ item }) {
@@ -8,7 +9,7 @@ export default function Navbar({ item }) {
             <div className={styles.nav_left}>
                 <Link href={"/"}>
                     <div className={styles.button}>
-                        <Image src="/../public/icon.png" alt="Logo - Bbb Icon" width={25} height={25} />
+                        <Image src={logo} alt="Logo - Bbb Icon" width={25} height={25} />
                     </div>
                 </Link>
                 <Link href={item.link}>

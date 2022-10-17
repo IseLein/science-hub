@@ -15,14 +15,14 @@
 }
 
 .title {
-    font-size: 1.3em;
+    font-size: 2.3em;
     font-weight: bold;
     margin-bottom: 5px;
 }
 
 .author {
-    font-size: 0.9em;
-    margin-bottom: 25px;
+    font-size: 1em;
+    margin-bottom: 45px;
 }
 
 .readTime {
@@ -30,7 +30,7 @@
 }
 
 .content {
-    text-align: justify;
+    font-size: 1.4em;
 }
 
 @media screen and (min-width: 768px) {
