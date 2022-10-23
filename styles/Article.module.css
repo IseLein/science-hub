@@ -31,6 +31,7 @@
 
 .content {
     font-size: 1.4em;
+    overflow-x: scroll;
 }
 
 @media screen and (min-width: 768px) {

@@ -30,9 +30,10 @@ export default function NewPost() {
             body: JSONdata,
         }
 
-        const response = await (await fetch(endpoint, options)).json();
+        const response = await fetch(endpoint, options);
+        const result = JSON.stringify(await response.json());
 
-        alert(JSON.stringify(response).title);
+        alert("New Post added. Maybe");
         router.push("/write/");
     }
 

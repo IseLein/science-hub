@@ -29,6 +29,8 @@ export default function NewPost() {
 
         const response = await (await fetch(endpoint, options)).json();
 
+        alert("New contibutor added. Maybe");
+
         router.push("/write/");
     }
 

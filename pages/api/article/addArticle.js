@@ -11,7 +11,6 @@ export default async function addArticle(req, res){
         const article = await Blog.create(req.body); // Create and add the Blog 'object'
         res.json({ article });
     } catch(error) {
-        console.log(error);
         res.json({ error })
     }
 }

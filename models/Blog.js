@@ -2,8 +2,7 @@ import mongoose from "mongoose";
 import createDOMPurify from "dompurify";
 import { JSDOM } from "jsdom";
 import { marked } from "marked";
-import { calculate } from "calculate-readtime/dist";
-import { readingTime } from "reading-time";
+import readingTime from "reading-time";
 import slugify from "slugify";
 const dompurify = createDOMPurify(new JSDOM().window);
 
@@ -54,7 +53,10 @@ Blog.pre('validate', function() {
         this.slug = slugify(this.title, {lower: true, strict: true});
     }
     if (this.content) {
-        this.readTime = readingTime(text).text;
+        const time = readingTime(this.content);
+        if (time.text) {
+            this.readTime = time.text;
+        }
         this.sanitizedHtml = dompurify.sanitize(marked(this.content));
     }
     this.publishedDate = Date.now();
