@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import WriteNew from "../../components/WriteNew";
 import Navbar from "../../components/Navbar";
 import SignInOut from "../../components/SignInOut";
 import styles from "../../styles/Write.module.css";
