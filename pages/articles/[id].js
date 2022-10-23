@@ -1,13 +1,16 @@
+import Head from "next/head";
+import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import styles from "../../styles/Article.module.css";
 import dbConnect from "../../util/dbConnect";
 import Blog from "../../models/Blog";
 import Footer from "../../components/Footer";
+import slugify from "slugify";
 
 export async function getStaticPaths() {
     try {
         await dbConnect();  // Connect to database
-        const articles = await Blog.find(); // Query the database
+        const articles = await Blog.find().sort({ publishedDate: -1 }); // Query the database
         const article_list = JSON.parse(JSON.stringify(articles));
 
         const paths = article_list.map((blog) => {
@@ -54,8 +57,13 @@ function getDateF(date) {
 }
 
 export default function Article({ article }) {
+    const slug = slugify(article.author, {lower: true, strict: true})
+
     return(
         <div className={styles.article}>
+            <Head>
+                <title>{article.title}</title>
+            </Head>
             <Navbar item={{
                 name: "",
                 link: "/articles"
@@ -66,16 +74,16 @@ export default function Article({ article }) {
                     {article.title}
                 </div>
                 <div className={styles.author}>
-                    <span>{article.author + " "}</span>
+                    <span><Link href={"/authors/" + slug}>{article.author + " "}</Link></span>
                     &bull;
                     <span>{" " + getDateF(article.publishedDate) + " "}</span>
                     &bull;
                     <span className={styles.readTime}>
-                        {" " + article.readTime + " minute read"}
+                        {" " + article.readTime}
                     </span>
                 </div>
-                <div className={styles.content}>
-                    {article.content}
+                <div  dangerouslySetInnerHTML={{ __html: article.sanitizedHtml }} className={styles.content}>
+                    {/* {article.sanitizedHtml} */}
                 </div>
             </div>
             <Footer />

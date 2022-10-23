@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Navbar from "../../components/Navbar";
 import Recent from "../../components/Recent";
 import dbConnect from "../../util/dbConnect";
@@ -8,7 +9,7 @@ import Footer from "../../components/Footer";
 export async function getServerSideProps() {
     try {
       await dbConnect();  // Connect to database
-      const articles = await Blog.find(); // Query the database
+      const articles = await Blog.find().sort({ publishedDate: -1 }); // Query the database
       return {
         props: {
           articles: JSON.parse(JSON.stringify(articles)),
@@ -23,16 +24,19 @@ export async function getServerSideProps() {
 
 export default function Articles({ articles }) {
     return (
-        <div className={styles.main}>
-            <Navbar item={{
-                name: "Articles",
-                link: "/articles/",
-            }}/>
-            <div className={styles.article_hero}></div>
-            <div className={styles.main_body}>
-              <Recent articles={articles} />
-              <Footer />
-            </div>
-        </div>
+      <div className={styles.main}>
+        <Head>
+          <title>Articles</title>
+        </Head>
+          <Navbar item={{
+              name: "Articles",
+              link: "/articles/",
+          }}/>
+          <div className={styles.article_hero}></div>
+          <div className={styles.main_body}>
+            <Recent articles={articles} />
+            <Footer />
+          </div>
+      </div>
     )
 };

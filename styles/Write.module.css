@@ -1,0 +1,109 @@
+.article_hero {
+    min-height: 90px;
+}
+
+.new_blog {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #040F0F;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.input_block {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+}
+
+.input_label {
+    font-weight: 400;
+    font-size: 1.4em;
+}
+
+.input_box {
+    padding: 10px;
+    border: 1px solid #040F0F;
+    border-radius: 6px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.2em;
+}
+
+.input_box_ta {
+    padding: 10px;
+    border: 1px solid #040F0F;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 1.2em;
+}
+
+.buttons {
+    padding-top: 10px;
+    padding-bottom: 30px;
+    text-align: right;
+}
+
+.bare_text {
+    text-align: center;
+    padding-left: 15vw;
+    padding-right: 15vw;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    font-size: 2.3em;
+}
+
+.btn {
+    margin-left: 40px;
+    color: #040F0F;
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border: 1px solid #040F0F;
+    border-radius: 4px;
+    cursor: pointer;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.btn_sel {
+    margin-left: 40px;
+    color: #85BDBF;
+    color: #040F0F;
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border: 1px solid #040F0F;
+    border-radius: 4px;
+    cursor: pointer;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.btn_row {
+    text-align: center;
+}
+
+.session_btn {
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    color: #040F0F;
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border: 1px solid #040F0F;
+    border-radius: 4px;
+    cursor: pointer;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+@media screen and (min-width: 768px) {
+    .new_blog {
+        padding-left: 15vw;
+        padding-right: 15vw;
+      }
+}

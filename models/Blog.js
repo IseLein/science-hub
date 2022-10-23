@@ -1,7 +1,22 @@
 import mongoose from "mongoose";
+import createDOMPurify from "dompurify";
+import { JSDOM } from "jsdom";
+import { marked } from "marked";
+import { calculate } from "calculate-readtime/dist";
+import { readingTime } from "reading-time";
+import slugify from "slugify";
+const dompurify = createDOMPurify(new JSDOM().window);
 
 const Blog = new mongoose.Schema({
     title: {
+        type: String,
+        required: true,
+    },
+    slug: {
+        type: String,
+        required: true,
+    },
+    description: {
         type: String,
         required: true,
     },
@@ -9,12 +24,12 @@ const Blog = new mongoose.Schema({
         type: String,
         required: true,
     },
-    author: {
+    sanitizedHtml: {
         type: String,
         required: true,
     },
-    published: {
-        type: Boolean,
+    author: {
+        type: String,
         required: true,
     },
     readTime: {
@@ -23,6 +38,7 @@ const Blog = new mongoose.Schema({
     },
     publishedDate: {
         type: Date,
+        required: true,
     },
     comments: {
         type: [{
@@ -32,5 +48,16 @@ const Blog = new mongoose.Schema({
         }],
     }
 }, { timestamps:true });
+
+Blog.pre('validate', function() {
+    if (this.title) {
+        this.slug = slugify(this.title, {lower: true, strict: true});
+    }
+    if (this.content) {
+        this.readTime = readingTime(text).text;
+        this.sanitizedHtml = dompurify.sanitize(marked(this.content));
+    }
+    this.publishedDate = Date.now();
+});
 
 export default mongoose.models.Blog || mongoose.model("Blog", Blog)

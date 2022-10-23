@@ -1,17 +1,16 @@
 import dbConnect from '../../../util/dbConnect';
-import Blog from '../../../models/Blog';
+import Author from '../../../models/Author';
 
 /**
  * @param {import('next').NextApiRequest} req
  * @param {import('next').NextApiResponse} res
  */
-export default async function addArticle(req, res){
+export default async function addAuthor(req, res){
     try {
         await dbConnect(); // Connect to the Database
-        const article = await Blog.create(req.body); // Create and add the Blog 'object'
-        res.json({ article });
+        const author = await Author.create(req.body); // Create and add the Blog 'object'
+        res.json({ author });
     } catch(error) {
-        console.log(error);
         res.json({ error })
     }
 }

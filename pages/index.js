@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import TypedText from '../components/TypedText';
@@ -12,7 +13,7 @@ import { faAngleDown, faCircleArrowRight } from "@fortawesome/free-solid-svg-ico
 export async function getStaticProps() {
   try {
     await dbConnect();  // Connect to database
-    const articles = await Blog.find(); // Query the database
+    const articles = await Blog.find().limit(5).sort({ publishedDate: -1 }); // Query the database
     return {
       props: {
         articles: JSON.parse(JSON.stringify(articles)),
@@ -28,6 +29,9 @@ export async function getStaticProps() {
 export default function Home({ articles }) {
   return (
     <div className={styles.main}>
+      <Head>
+        <title>Science Hub</title>
+      </Head>
       <Navbar item={{
         name: "Science Hub",
         link: "/",

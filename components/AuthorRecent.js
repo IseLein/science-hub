@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from "../styles/Articles.module.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 function getDateF(date) {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -18,14 +18,14 @@ export default function Recent({ articles }) {
                 <Link href={"/articles/" + article._id} key={article._id}>
                     <div className={styles.article_display}>
                         <div className={styles.article_title}>
-                            {article.title} <FontAwesomeIcon icon={ faArrowRight } />
+                            {article.title}
                         </div>
                         <div className={styles.article_info}>
                             <span>{article.author + " "}</span>
                             &bull;
                             <span>{" " + getDateF(article.publishedDate) + " "}</span>
                             &bull;
-                            <span className={styles.article_read_time}>{" " + article.readTime}</span>
+                            <span className={styles.article_read_time}>{" " + article.readTime + " minute"}</span>
                         </div>
                     </div>
                 </Link>
