@@ -10,7 +10,7 @@ import Link from "next/link";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faCircleArrowRight } from "@fortawesome/free-solid-svg-icons";
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   try {
     await dbConnect();  // Connect to database
     const articles = await Blog.find().limit(5).sort({ publishedDate: -1 }); // Query the database
