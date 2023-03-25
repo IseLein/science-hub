@@ -31,10 +31,14 @@ export default function NewPost() {
         }
 
         const response = await fetch(endpoint, options);
-        const result = JSON.stringify(await response.json());
-
-        alert("New Post added. Maybe");
-        router.push("/write/");
+        const result = await response.json();
+    
+        if (response.ok) {
+            alert("New Post added successfully");
+            router.push("/write/");
+        } else {
+            alert(result.error);
+        }
     }
 
     return(
