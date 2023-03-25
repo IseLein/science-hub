@@ -31,6 +31,7 @@ export default function Home({ articles }) {
     <div className={styles.main}>
       <Head>
         <title>Science Hub</title>
+        <meta name="google-site-verification" content="ldYxljjHIS0gfplq7XFPslDLPybRDTXDVuO47EQGGy4" />
       </Head>
       <Navbar item={{
         name: "Science Hub",
