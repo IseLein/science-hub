@@ -5,32 +5,10 @@ import styles from "../../styles/Article.module.css";
 import dbConnect from "../../util/dbConnect";
 import Blog from "../../models/Blog";
 import Footer from "../../components/Footer";
+import Custom404 from "../404";
 import slugify from "slugify";
 
-export async function getStaticPaths() {
-    try {
-        await dbConnect();  // Connect to database
-        const articles = await Blog.find().sort({ publishedDate: -1 }); // Query the database
-        const article_list = JSON.parse(JSON.stringify(articles));
-
-        const paths = article_list.map((blog) => {
-            return {
-                params: { id: blog._id.toString() }
-            }
-        })
-        return {
-            paths,
-            fallback: false
-        }
-    } catch(error) {
-        return {
-            paths: [],
-            fallback: false
-        }
-    }
-}
-
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
     const id = context.params.id;
 
     try {
@@ -43,7 +21,7 @@ export async function getStaticProps(context) {
         };
     } catch (error) {
         return {
-          notFound: true,
+            props: { article: null },
         };
     }
 };
@@ -57,6 +35,9 @@ function getDateF(date) {
 }
 
 export default function Article({ article }) {
+    if (!article) {
+        return <Custom404 />
+    }
     const slug = slugify(article.author, {lower: true, strict: true})
 
     return(
