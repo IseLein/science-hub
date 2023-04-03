@@ -47,11 +47,11 @@ export default function Article({ article, author }) {
         <div>
             <Head>
                 <title>{article.title}</title>
-                <meta name="og:title" content={article.title} />
-                <meta name="og:description" content={article.description} />
-                <meta name="og:image" content={article.thumbnailSource} />
-                <meta name="og:type" content="article" />
-                <meta name="og:url" content={"https://science-hub-blog.vercel.app/" + article._id} />
+                <meta property="og:title" content={article.title} />
+                <meta property="og:description" content={article.description} />
+                <meta property="og:image" content={article.thumbnailSource} />
+                <meta property="og:type" content="article" />
+                <meta property="og:url" content={"https://science-hub-blog.vercel.app/" + article._id} />
             </Head>
             <Navbar item={{
                 name: "",

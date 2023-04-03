@@ -31,21 +31,23 @@ export default function Home({ articles }) {
       <Head>
         <title>Science Hub</title>
         <meta name="google-site-verification" content="ldYxljjHIS0gfplq7XFPslDLPybRDTXDVuO47EQGGy4" />
-        <meta name="og:title" content="Science Hub Blog" />
-        <meta name="og:description" content="People do not have ideas, ideas have people - Carl Jung" />
-        <meta name="og:image" content="https://firebasestorage.googleapis.com/v0/b/science-hub-blog-2b481.appspot.com/o/thumbnails%2Fscience_hub.jpg?alt=media&token=4e9c5352-8bdc-4e8b-9bdb-446cb3ec936c" />
-        <meta name="og:type" content="article" />
-        <meta name="og:url" content="https://science-hub-blog.vercel.app/" />
+        <meta property="og:title" content="Science Hub Blog" />
+        <meta property="og:description" content="People do not have ideas, ideas have people - Carl Jung" />
+        <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/science-hub-blog-2b481.appspot.com/o/science_hub.jpg?alt=media&token=da1be761-b561-4fd6-b45c-3c080cda78d7" />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://science-hub-blog.vercel.app/" />
       </Head>
       <Navbar item={{
         name: "Science Hub",
         link: "/",
       }}/>
-      <div className="bg-[url(~/public/mobile_home.png)] md:bg-[url(~/public/hero.png)] bg-fixed bg-cover min-h-[80vh] flex flex-col">
+      <div className="bg-[url(https://firebasestorage.googleapis.com/v0/b/science-hub-blog-2b481.appspot.com/o/mobile_home.png?alt=media&token=c451404d-e7aa-472e-995f-110ab0433ec5)]
+            md:bg-[url(https://firebasestorage.googleapis.com/v0/b/science-hub-blog-2b481.appspot.com/o/hero.png?alt=media&token=5d85f0df-12a7-4cc7-8680-3218600484db)]
+            bg-fixed bg-cover min-h-[80vh] flex flex-col">
         <div className="flex-1"></div>
         <div className="text-orange-300 pl-10 md:pl-28 lg:pl-48">
           <h1 className="font-fira-mono text-4xl md:text-5xl 2xl:text-6xl"><TypedText /></h1>
-          <h3 className="pt-4 font-jetbrains text-lg">[insert inspiring quote]</h3>
+          <h3 className="pt-4 font-jetbrains md:text-lg">[insert inspiring quote]</h3>
         </div>
         <div className="flex-1"></div>
       </div>
