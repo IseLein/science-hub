@@ -18,7 +18,7 @@ export default function Previews({ articles }) {
                             shadow-orange-800 dark:shadow-orange-100 text-amber-900 dark:text-orange-300">
                         <div className="relative pt-[56.25%]">
                             <div className="p-0 h-[100%]">
-                                <Image src={article.thumbnailSource} layout="fill" objectFit="cover" />
+                                <Image src={article.thumbnailSource} layout="fill" objectFit="cover" alt={article.thumbnailAlt} />
                             </div>
                         </div>
                         <div className="p-4">

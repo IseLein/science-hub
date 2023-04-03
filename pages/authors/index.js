@@ -39,8 +39,8 @@ export default function Authors({ authors }) {
             <ul className="list-disc">
                 {
                   authors.map((author) => (
-                      <li>
-                          <Link href={"/authors/" + author.username} key={author._id}>
+                      <li key={author._id}>
+                          <Link href={"/authors/" + author.username}>
                               <div className="py-4 text-2xl underline cursor-pointer">
                                   {author.name}
                               </div>
