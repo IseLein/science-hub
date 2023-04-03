@@ -1,12 +1,14 @@
 import Head from "next/head";
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
-import styles from "../../styles/Article.module.css";
 import dbConnect from "../../util/dbConnect";
 import Blog from "../../models/Blog";
+import Author from "../../models/Author";
 import Footer from "../../components/Footer";
 import Custom404 from "../404";
 import slugify from "slugify";
+import 'tailwindcss/tailwind.css';
+import '@tailwindcss/typography';
 
 export async function getServerSideProps(context) {
     const id = context.params.id;
@@ -14,9 +16,11 @@ export async function getServerSideProps(context) {
     try {
         await dbConnect();  // Connect to database
         const article = await Blog.findById(id); // Query the database
+        const author = await Author.findOne({ name: article.author });
         return {
           props: {
             article: JSON.parse(JSON.stringify(article)),
+            author: JSON.parse(JSON.stringify(author)),
           },
         };
     } catch (error) {
@@ -34,38 +38,46 @@ function getDateF(date) {
     return months[month]+ " " + day + ", " + year;
 }
 
-export default function Article({ article }) {
+export default function Article({ article, author }) {
     if (!article) {
         return <Custom404 />
     }
-    const slug = slugify(article.author, {lower: true, strict: true})
 
     return(
-        <div className={styles.article}>
+        <div>
             <Head>
                 <title>{article.title}</title>
+                <meta name="og:title" content={article.title} />
+                <meta name="og:description" content={article.description} />
+                <meta name="og:image" content={article.thumbnailSource} />
+                <meta name="og:type" content="article" />
+                <meta name="og:url" content={"https://science-hub-blog.vercel.app/" + article._id} />
             </Head>
             <Navbar item={{
                 name: "",
                 link: "/articles"
             }} />
-            <div className={styles.article_hero}></div>
-            <div className={styles.main_body}>
-                <div className={styles.title}>
+            <div></div>
+            <div className="px-10 md:px-28 lg:px-48 text-amber-900 dark:text-orange-300">
+                <div className="pt-28 text-4xl lg:text-5xl font-semibold">
                     {article.title}
                 </div>
-                <div className={styles.author}>
-                    <span><Link href={"/authors/" + slug}>{article.author + " "}</Link></span>
+                <div className="py-4 text-lg lg:text-2xl text-amber-600 dark:text-orange-200">
+                    {article.description}
+                </div>
+                <div className="pt-1 pb-12 font-sans">
+                    <span><Link href={"/authors/" + author.username}>{article.author + " "}</Link></span>
                     &bull;
                     <span>{" " + getDateF(article.publishedDate) + " "}</span>
                     &bull;
-                    <span className={styles.readTime}>
+                    <span className="text-amber-600 dark:text-orange-200">
                         {" " + article.readTime}
                     </span>
                 </div>
-                <div  dangerouslySetInnerHTML={{ __html: article.sanitizedHtml }} className={styles.content}>
-                    {/* {article.sanitizedHtml} */}
-                </div>
+                <article className="prose prose-iselein md:prose-lg lg:prose-xl font-jetbrains
+                        dark:prose-invert max-w-none"
+                    dangerouslySetInnerHTML={{ __html: article.sanitizedHtml }}>
+                </article>
             </div>
             <Footer />
         </div>

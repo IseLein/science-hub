@@ -15,12 +15,16 @@ export default function NewPost() {
         const data = {
             title: event.target.title.value,
             author: event.target.author.value,
+            categories: [event.target.category.value],
             description: event.target.description.value,
             content: event.target.content.value,
+            thumbnailSource: event.target.src.value,
+            thumbnailAlt: event.target.alt.value,
         };
 
         const endpoint = "/api/article/addArticle";
         const JSONdata = JSON.stringify(data);
+        console.log(data);
 
         const options = {
             method: "POST",
@@ -29,6 +33,7 @@ export default function NewPost() {
             },
             body: JSONdata,
         }
+
 
         const response = await fetch(endpoint, options);
         const result = await response.json();
@@ -62,6 +67,18 @@ export default function NewPost() {
                     <div className={styles.input_block}>
                         <label htmlFor="author" className={styles.input_label}>Author</label>
                         <input required type="text" name="author" id="author" className={styles.input_box} value={session.user.name} readOnly></input>
+                    </div>
+                    <div className={styles.input_block}>
+                        <label htmlFor="category" className={styles.input_label}>Category</label>
+                        <input required type="text" name="category" id="category" className={styles.input_box}></input>
+                    </div>
+                    <div className={styles.input_block}>
+                        <label htmlFor="src" className={styles.input_label}>Src</label>
+                        <input required type="text" name="src" id="src" className={styles.input_box}></input>
+                    </div>
+                    <div className={styles.input_block}>
+                        <label htmlFor="alt" className={styles.input_label}>Alt</label>
+                        <input required type="text" name="alt" id="alt" className={styles.input_box}></input>
                     </div>
                     <div className={styles.input_block}>
                         <label htmlFor="description" className={styles.input_label}>Description</label>

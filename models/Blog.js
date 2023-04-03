@@ -39,6 +39,18 @@ const Blog = new mongoose.Schema({
         type: Date,
         required: true,
     },
+    thumbnailSource: {
+        type: String,
+        required: true,
+    },
+    thumbnailAlt: {
+        type: String,
+        required: true,
+    },
+    categories: {
+        type: [String],
+        required: true,
+    },
     comments: {
         type: [{
             name: String,

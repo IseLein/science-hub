@@ -3,8 +3,8 @@ import Navbar from "../../components/Navbar";
 import dbConnect from "../../util/dbConnect";
 import Blog from "../../models/Blog";
 import Author from "../../models/Author";
-import styles from "../../styles/Articles.module.css";
-import Recent from "../../components/Recent";
+import Previews from "../../components/Previews";
+import Footer from "../../components/Footer";
 
 export async function getStaticPaths() {
     try {
@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 
         const paths = author_list.map((author) => {
             return {
-                params: { id: author.slug }
+                params: { id: author.username }
             }
         })
 
@@ -35,7 +35,7 @@ export async function getStaticProps(context) {
 
     try {
         await dbConnect();  // Connect to database
-        const author = await Author.findOne({ slug: id });
+        const author = await Author.findOne({ username: id });
         const articles = await Blog.find({ author: author.name }).sort({ publishedDate: -1 }); // Query the database
         
         return {
@@ -60,15 +60,19 @@ export default function AuthorPage({ author, articles }) {
                 </title>
             </Head>
             <Navbar item={{
-                name: "Articles",
-                link: "/articles/",
+                name: "Contributors",
+                link: "/authors/",
             }}/>
-            <div className={styles.article_hero}></div>
-            <div className={styles.main_body}>
-                <h1>{"Posts by "}{author.name}</h1>
-            </div>
-            <div className={styles.main_body}>
-                <Recent articles={ articles }/>
+            <div className="px-10 md:px-28 lg:px-48 text-amber-900 dark:text-orange-300
+                    h-[100vh] overflow-y-scroll flex flex-col">
+                <div className="pt-28 pb-12 text-4xl text-center font-semibold">
+                    <h1>{"Posts by "}{author.name}</h1>
+                </div>
+                <div>
+                    <Previews articles={ articles }/>
+                </div>
+                <div className="flex-1"></div>
+                <Footer />
             </div>
         </div>
     );

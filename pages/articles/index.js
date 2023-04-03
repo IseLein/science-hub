@@ -1,9 +1,8 @@
 import Head from "next/head";
 import Navbar from "../../components/Navbar";
-import Recent from "../../components/Recent";
+import Previews from "../../components/Previews";
 import dbConnect from "../../util/dbConnect";
 import Blog from "../../models/Blog";
-import styles from "../../styles/Articles.module.css";
 import Footer from "../../components/Footer";
 
 export async function getServerSideProps() {
@@ -24,7 +23,7 @@ export async function getServerSideProps() {
 
 export default function Articles({ articles }) {
     return (
-      <div className={styles.main}>
+      <div>
         <Head>
           <title>Articles</title>
         </Head>
@@ -32,9 +31,14 @@ export default function Articles({ articles }) {
               name: "Articles",
               link: "/articles/",
           }}/>
-          <div className={styles.article_hero}></div>
-          <div className={styles.main_body}>
-            <Recent articles={articles} />
+          <div>
+            <div className="pt-28 pb-12 px-4 text-center text-amber-900 dark:text-orange-300
+                font-mono font-semibold text-4xl">
+                Latest Posts from Science Hub
+            </div>
+            <div className="px-10 md:px-28 lg:px-48">
+                <Previews articles={articles} />
+            </div>
             <Footer />
           </div>
       </div>
