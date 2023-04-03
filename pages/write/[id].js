@@ -17,7 +17,7 @@ export async function getStaticPaths() {
 
         const paths = author_list.map((author) => {
             return {
-                params: { id: author.slug }
+                params: { id: author.username }
             }
         })
 
