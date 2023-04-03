@@ -36,6 +36,11 @@ export default function Home({ articles }) {
         <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/science-hub-blog-2b481.appspot.com/o/science_hub.jpg?alt=media&token=da1be761-b561-4fd6-b45c-3c080cda78d7" />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://science-hub-blog.vercel.app/" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Science Hub Blog" />
+        <meta name="twitter:description" content="People do not have ideas, ideas have people - Carl Jung" />
+        <meta name="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/science-hub-blog-2b481.appspot.com/o/science_hub.jpg?alt=media&token=da1be761-b561-4fd6-b45c-3c080cda78d7" />
+        <meta name="twitter:image:alt" content="A young lady reading on a table under a bright light" />
       </Head>
       <Navbar item={{
         name: "Science Hub",
