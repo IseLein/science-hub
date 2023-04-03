@@ -80,7 +80,7 @@ export default function Article({ article, author }) {
                     </span>
                 </div>
                 <article className="prose prose-iselein md:prose-lg lg:prose-xl font-jetbrains
-                        dark:prose-invert max-w-none"
+                        dark:prose-invert max-w-none prose-code:font-jetbrains prose-img:rounded-lg"
                     dangerouslySetInnerHTML={{ __html: article.sanitizedHtml }}>
                 </article>
             </div>
