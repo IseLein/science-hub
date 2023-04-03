@@ -51,7 +51,7 @@ export default function Article({ article, author }) {
                 <meta property="og:description" content={article.description} />
                 <meta property="og:image" content={article.thumbnailSource} />
                 <meta property="og:type" content="article" />
-                <meta property="og:url" content={"https://science-hub-blog.vercel.app/" + article._id} />
+                <meta property="og:url" content={"https://science-hub-blog.vercel.app/articles" + article._id} />
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content={article.title} />
                 <meta name="twitter:description" content={article.description} />
