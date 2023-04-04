@@ -6,7 +6,7 @@ import Blog from "../../models/Blog";
 import Author from "../../models/Author";
 import Footer from "../../components/Footer";
 import Custom404 from "../404";
-import slugify from "slugify";
+import Image from "next/image";
 import 'tailwindcss/tailwind.css';
 import '@tailwindcss/typography';
 
@@ -63,14 +63,14 @@ export default function Article({ article, author }) {
                 link: "/articles"
             }} />
             <div></div>
-            <div className="px-10 md:px-28 lg:px-48 text-amber-900 dark:text-orange-300">
+            <div className="px-10 md:px-32 lg:px-56 2xl:px-96 text-amber-900 dark:text-orange-300">
                 <div className="pt-28 text-4xl lg:text-5xl font-semibold">
                     {article.title}
                 </div>
                 <div className="py-4 text-lg lg:text-2xl text-amber-600 dark:text-orange-200">
                     {article.description}
                 </div>
-                <div className="pt-1 pb-12 font-sans">
+                <div className="pt-1 pb-6 font-sans">
                     <span><Link href={"/authors/" + author.username}>{article.author + " "}</Link></span>
                     &bull;
                     <span>{" " + getDateF(article.publishedDate) + " "}</span>
@@ -79,8 +79,14 @@ export default function Article({ article, author }) {
                         {" " + article.readTime}
                     </span>
                 </div>
-                <article className="prose prose-iselein md:prose-lg lg:prose-xl font-jetbrains
-                        dark:prose-invert max-w-none prose-code:font-jetbrains prose-img:rounded-lg"
+                <div className="relative pt-[56.25%] rounded-lg overflow-hidden">
+                    <div className="p-0 h-[100%]">
+                        <Image src={article.thumbnailSource} layout="fill" objectFit="cover" alt={article.thumbnailAlt} />
+                    </div>
+                </div>
+                <article className="pt-10 prose prose-iselein md:prose-lg lg:prose-xl font-jetbrains
+                        dark:prose-invert max-w-none prose-code:font-jetbrains prose-img:rounded-lg
+                        prose-code:bg-orange-100 prose-code:dark:bg-zinc-800"
                     dangerouslySetInnerHTML={{ __html: article.sanitizedHtml }}>
                 </article>
             </div>

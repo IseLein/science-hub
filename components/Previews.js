@@ -35,7 +35,10 @@ export default function Previews({ articles }) {
                             <div className="pt-2 font-sans text-xl font-semibold">
                                 {article.title}
                             </div>
-                            <div className="pt-2 text-amber-800 dark:text-orange-200 font-light">
+                            <div className="pt-2 font-light text-amber-800 dark:text-orange-200">
+                                {article.description}
+                            </div>
+                            <div className="pt-2 text-amber-900 dark:text-orange-300 font-semibold text-sm">
                                 <span>{article.author + " "}</span>
                                 &bull;
                                 <span>{" " + getDateF(article.publishedDate) + " "}</span>
