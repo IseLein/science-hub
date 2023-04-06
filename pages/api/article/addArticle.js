@@ -9,7 +9,7 @@ import { getToken } from 'next-auth/jwt';
 export default async function addArticle(req, res){
     const token = await getToken({ req });
     if (!token) {
-        res.status(401).json({ success:false, error: token });
+        res.status(401).json({ success:false, error: "uhh, you're not allowed to do that" });
     }
 
     try {
