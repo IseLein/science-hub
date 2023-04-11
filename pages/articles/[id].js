@@ -63,28 +63,30 @@ export default function Article({ article, author }) {
                 link: "/articles"
             }} />
             <div></div>
-            <div className="px-10 md:px-32 lg:px-56 2xl:px-96 text-amber-900 dark:text-orange-300">
-                <div className="pt-28 text-4xl lg:text-5xl font-semibold">
+            <div className="px-5 md:px-40 lg:px-72 2xl:px-[25rem] text-amber-900 dark:text-orange-300">
+                <div className="pt-28 text-3xl lg:text-5xl font-bold">
                     {article.title}
                 </div>
-                <div className="py-4 text-lg lg:text-2xl text-amber-600 dark:text-orange-200">
+                <div className="py-2 lg:py-5 lg:text-xl font-sans text-amber-600 dark:text-orange-200">
                     {article.description}
                 </div>
-                <div className="pt-1 pb-6 font-sans">
-                    <span><Link href={"/authors/" + author.username}>{article.author + " "}</Link></span>
-                    &bull;
+                <div className="pt-1 text-sm lg:text-lg pb-6 font-sans flex flex-row items-center">
+                    <div className="pr-4 items-center">
+                        <Image className="rounded-full" src={author.avatar} width={40} height={40} alt={""}/>
+                    </div>
+                    <div>
+                    <span className="font-semibold"><Link href={"/authors/" + author.username}>{article.author + " "}</Link></span>
+                    <div>
                     <span>{" " + getDateF(article.publishedDate) + " "}</span>
                     &bull;
                     <span className="text-amber-600 dark:text-orange-200">
                         {" " + article.readTime}
                     </span>
-                </div>
-                <div className="relative pt-[56.25%] rounded-lg overflow-hidden">
-                    <div className="p-0 h-[100%]">
-                        <Image src={article.thumbnailSource} layout="fill" objectFit="cover" alt={article.thumbnailAlt} />
+                    </div>
                     </div>
                 </div>
-                <article className="pt-10 prose prose-iselein md:prose-lg lg:prose-xl font-jetbrains
+                <hr className="py-5 border-amber-600 dark:border-orange-200"/>
+                <article className="prose prose-iselein md:prose-lg lg:prose-xl font-jetbrains
                         dark:prose-invert max-w-none prose-code:font-jetbrains prose-img:rounded-lg
                         prose-code:bg-orange-100 prose-code:dark:bg-zinc-800"
                     dangerouslySetInnerHTML={{ __html: article.sanitizedHtml }}>

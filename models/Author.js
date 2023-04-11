@@ -12,6 +12,10 @@ const Author = new mongoose.Schema({
     firstName: {
         type: String,
         required: true,
+    },
+    avatar: {
+        type: String,
+        required: true,
     }
 })
 
