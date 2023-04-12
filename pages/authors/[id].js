@@ -37,7 +37,7 @@ export async function getStaticProps(context) {
         await dbConnect();  // Connect to database
         const author = await Author.findOne({ username: id });
         const articles = await Blog.find({ author: author.name }).sort({ publishedDate: -1 }); // Query the database
-        
+
         return {
           props: {
             author: JSON.parse(JSON.stringify(author)),

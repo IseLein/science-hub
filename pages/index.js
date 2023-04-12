@@ -3,8 +3,10 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import TypedText from '../components/TypedText';
 import Previews from "../components/Previews";
+import CategoryPreviews from "../components/CategoryPreviews";
 import dbConnect from "../util/dbConnect";
 import Blog from "../models/Blog";
+import Category from "../models/Category";
 import Link from "next/link";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleArrowRight } from "@fortawesome/free-solid-svg-icons";
@@ -13,9 +15,11 @@ export async function getServerSideProps() {
   try {
     await dbConnect();  // Connect to database
     const articles = await Blog.find().limit(6).sort({ publishedDate: -1 }); // Query the database
+    const categories = await Category.find();
     return {
       props: {
         articles: JSON.parse(JSON.stringify(articles)),
+        categories: JSON.parse(JSON.stringify(categories)),
       },
     };
   } catch (error) {
@@ -25,7 +29,7 @@ export async function getServerSideProps() {
   }
 };
 
-export default function Home({ articles }) {
+export default function Home({ articles, categories }) {
   return (
     <div>
       <Head>
@@ -67,6 +71,11 @@ export default function Home({ articles }) {
             </div>
           </div>
           <Previews articles={articles} />
+          <hr className="my-10 border-amber-600 dark:border-orange-200" />
+          <div className="pt-4 pb-4 flex flex-row items-end justify-between">
+            <div className="font-sans font-bold text-xl">TAGS</div>
+          </div>
+          <CategoryPreviews categories={categories} />
         </div>
       </div>
       <Footer />
