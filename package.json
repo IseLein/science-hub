@@ -26,6 +26,7 @@
     "nodemailer": "^6.8.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-image-picker-editor": "^1.3.2",
     "reading-time": "^1.5.0",
     "slugify": "^1.6.5",
     "typed.js": "^2.0.12"
