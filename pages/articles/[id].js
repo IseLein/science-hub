@@ -88,7 +88,7 @@ export default function Article({ article, author }) {
                 <hr className="py-5 border-amber-600 dark:border-orange-200"/>
                 <article className="prose prose-iselein md:prose-lg lg:prose-xl font-jetbrains
                         dark:prose-invert max-w-none prose-code:font-jetbrains prose-img:rounded-lg
-                        prose-code:bg-orange-100 prose-code:dark:bg-zinc-800"
+                        prose-code:bg-orange-100 prose-code:dark:bg-zinc-800 prose-img:mx-auto"
                     dangerouslySetInnerHTML={{ __html: article.sanitizedHtml }}>
                 </article>
             </div>

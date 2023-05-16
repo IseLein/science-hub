@@ -13,3 +13,7 @@
 #bg-opacity-30 {
     --tw-bg-opacity: 0.3;
 }
+
+.toastui-editor-contents {
+    font-size: 18px !important;
+}
