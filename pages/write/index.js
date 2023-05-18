@@ -7,6 +7,7 @@ import slugify from "slugify";
 import dbConnect from "../../util/dbConnect";
 import Author from "../../models/Author";
 import Blog from "../../models/Blog";
+import Draft from "../../models/Draft";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -30,6 +31,7 @@ export async function getServerSideProps(context) {
             props: {
                 author: null,
                 articles: null,
+                drafts: null
             },
         };
     }
@@ -39,11 +41,13 @@ export async function getServerSideProps(context) {
         await dbConnect();
         const writer = await Author.findOne({ username: author_slug });
         const articles = await Blog.find({ author: writer.name }).sort({ publishedDate: -1 });
+        const drafts = await Draft.find({ author: writer.name }).sort({ updatedAt: -1 });
 
         return {
             props: {
                 author: JSON.parse(JSON.stringify(writer)),
-                articles: JSON.parse(JSON.stringify(articles))
+                articles: JSON.parse(JSON.stringify(articles)),
+                drafts: JSON.parse(JSON.stringify(drafts))
             },
         }
     } catch (error) {
@@ -53,7 +57,7 @@ export async function getServerSideProps(context) {
     }
 };
 
-export default function Write({ author, articles }) {
+export default function Write({ author, articles, drafts }) {
     const { data: session, status } = useSession();
     const loading = status === "loading";
 
@@ -115,9 +119,42 @@ export default function Write({ author, articles }) {
                             </div>
                         </div>
                         <div className="pt-12 px-4 text-xl lg:text-2xl 2xl:text-3xl font-semibold">
+                            DRAFTS
+                        </div>
+                        <div className="grid grid-cols-1">
+                            {drafts.length <= 0 &&
+                                <div className="py-4 text-center md:text-lg 2xl:text-2xl font-fira-mono">
+                                    <div>The first draft of anything is sh*t - Ernest Hemingway</div>
+                                    <div>{"Pump out some first drafts and clarify your thoughts about stuff"}</div>
+                                </div>
+                            }
+                            {drafts.map((draft) => (
+                                <div key={draft._id}>
+                                    <Link href={"/write/new_post"+draft._id}>
+                                        <div className="p-4 my-4 cursor-pointer hover:bg-orange-200 hover:dark:bg-zinc-800 rounded-lg">
+                                            <div className="font-semibold md:text-lg lg:text-3xl 2xl:text-4xl">
+                                                {draft.title}
+                                            </div>
+                                            <div className="md:text-lg 2xl:text-2xl text-amber-800 dark:text-orange-200">
+                                                {"Last updated: " + draft.updatedAt}
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="grid grid-cols-1">
+                        </div>
+                        <div className="pt-12 px-4 text-xl lg:text-2xl 2xl:text-3xl font-semibold">
                             OLD POSTS
                         </div>
                         <div className="grid grid-cols-1">
+                            {articles.length <= 0 &&
+                                <div className="py-4 text-center md:text-lg 2xl:text-2xl font-fira-mono">
+                                    <div>Your catalogue is empty :/</div>
+                                    <div>{"Pick your pen and let's see your literary brilliance"}</div>
+                                </div>
+                            }
                             {articles.map((article) => (
                                 <div key={article._id} className="border-b border-amber-900 dark:border-orange-300">
                                     <Link href={"/articles/" + article._id}>
