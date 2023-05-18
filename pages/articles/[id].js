@@ -7,8 +7,8 @@ import Author from "../../models/Author";
 import Footer from "../../components/Footer";
 import Custom404 from "../404";
 import Image from "next/image";
-import 'tailwindcss/tailwind.css';
-import '@tailwindcss/typography';
+// import 'tailwindcss/tailwind.css';
+// import '@tailwindcss/typography';
 
 export async function getServerSideProps(context) {
     const id = context.params.id;

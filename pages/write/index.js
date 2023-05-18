@@ -35,7 +35,7 @@ export async function getServerSideProps(context) {
     }
 
     try {
-        const author_slug = slugify(session.user.name, {lower: true, strict: true});
+        const author_slug = slugify(session.user.name, {lower: true});
         await dbConnect();
         const writer = await Author.findOne({ username: author_slug });
         const articles = await Blog.find({ author: writer.name }).sort({ publishedDate: -1 });
@@ -107,7 +107,7 @@ export default function Write({ author, articles }) {
                             </div>
                             <div className="mt-4 text-center rounded-lg w-fit text-amber-900 dark:text-orange-300
                                     text-sm md:text-lg bg-orange-200 dark:bg-zinc-800 font-semibold">
-                                <Link href={"/write/new_post"}>
+                                <Link href={"/write/new_post/new"}>
                                     <button className="px-3 py-2">
                                         NEW POST
                                     </button>

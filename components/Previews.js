@@ -25,7 +25,7 @@ export default function Previews({ articles }) {
                         <div className="p-4">
                             <div className="grid grid-cols-3 gap-2">
                                 {article.categories.map((category, index) => (
-                                    <Link href={"/categories/" + slugify(category.toString(), {lower: true, strict: true})} key={index}>
+                                    <Link href={"/categories/" + slugify(category.toString(), {lower: true})} key={index}>
                                         <div className="px-2 truncate bg-orange-300 dark:bg-zinc-700 text-center font-semibold
                                             rounded dark:text-orange-200">
                                             {category.toString()}

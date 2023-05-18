@@ -62,7 +62,7 @@ const Blog = new mongoose.Schema({
 
 Blog.pre('validate', function() {
     if (this.title) {
-        this.slug = slugify(this.title, {lower: true, strict: true});
+        this.slug = slugify(this.title, {lower: true});
     }
     if (this.content) {
         const time = readingTime(this.content);

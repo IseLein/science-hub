@@ -97,7 +97,7 @@ export default function NewPost() {
                                 <div className="pr-8 md:pr-24 lg:pr-48">
                                 <span className="font-semibold">{name + " "}</span>
                                 <div className="text-sm">
-                                    {"@" + slugify(session.user.name, {lower: true, strict: true})}
+                                    {"@" + slugify(session.user.name, {lower: true})}
                                 </div>
                                 </div>
                                 <SignInOut />
@@ -119,7 +119,7 @@ export default function NewPost() {
                         </div>
                         <div className="font-jetbrains md:text-xl lg:text-2xl py-2 text-center">
                             <label htmlFor="username" className="pr-4">Username:</label>
-                            <input required type="text" name="username" id="username" className="pl-2 border-b text-center md:text-left" value={slugify(session.user.name, {lower: true, strict: true})} readOnly></input>
+                            <input required type="text" name="username" id="username" className="pl-2 border-b text-center md:text-left" value={slugify(session.user.name, {lower: true})} readOnly></input>
                         </div>
                         <div className="py-4 flex justify-center md:text-xl">
                             <div className="w-fit rounded-lg bg-orange-200 dark:bg-zinc-800">
