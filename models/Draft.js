@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const Draft = new mongoose.Schema({
     title: {
         type: String,
+        required: true,
     },
     description: {
         type: String,
@@ -22,7 +23,6 @@ const Draft = new mongoose.Schema({
     },
     categories: {
         type: [String],
-        required: true,
     },
 }, { timestamps: true });
 
