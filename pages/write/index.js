@@ -130,7 +130,7 @@ export default function Write({ author, articles, drafts }) {
                             }
                             {drafts.map((draft) => (
                                 <div key={draft._id}>
-                                    <Link href={"/write/new_post"+draft._id}>
+                                    <Link href={"/write/new_post/"+draft._id}>
                                         <div className="p-4 my-4 cursor-pointer hover:bg-orange-200 hover:dark:bg-zinc-800 rounded-lg">
                                             <div className="font-semibold md:text-lg lg:text-3xl 2xl:text-4xl">
                                                 {draft.title}
