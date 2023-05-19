@@ -85,45 +85,6 @@ export default function NewPost({ draft, author, allCategories }) {
         if (draft.thumbnailSource) { placeholderImg = draft.thumbnailSource; }
         if (draft.thumbnailAlt) { defaultAlt = draft.thumbnailAlt; }
         if (draft.categories) { defaultCat = draft.categories; }
-    } else {
-        console.log("We're NOT doing something right");
-    }
-
-    const handlePublish = async(event) => {
-        event.preventDefault();
-
-        const data = {
-            title: event.target.title.value,
-            author: event.target.author.value,
-            categories: [event.target.category.value],
-            description: event.target.description.value,
-            content: event.target.content.value,
-            thumbnailSource: event.target.src.value,
-            thumbnailAlt: event.target.alt.value,
-        };
-
-        const endpoint = "/api/article/addArticle";
-        const JSONdata = JSON.stringify(data);
-        console.log(data);
-
-        const options = {
-            method: "POST",
-            headers: {
-                "Content-type": "application/json",
-            },
-            body: JSONdata,
-        }
-
-
-        const response = await fetch(endpoint, options);
-        const result = await response.json();
-
-        if (response.ok) {
-            alert("New Post added successfully");
-            router.push("/write/");
-        } else {
-            alert(result.error);
-        }
     }
 
     const [imageSrc, setImageSrc] = useState(placeholderImg);
@@ -280,6 +241,112 @@ export default function NewPost({ draft, author, allCategories }) {
         }
     }
 
+    const handlePublish = async() => {
+        if (draft === "new") {
+            alert("Save draft before publishing");
+            return;
+        }
+        await handleSave();
+
+        const confirmed = window.confirm("Are you sure you want to publish this draft?");
+        if (!confirmed) {
+            return
+        }
+
+        // validate image. all the other fields are validated with mongoose
+        const defaultImage = "https://firebasestorage.googleapis.com/v0/b/science-hub-blog-2b481.appspot.com/o/placeholder-image.jpg?alt=media&token=46f99875-3a21-4be2-8d22-ef5df4cc708f";
+        if (imageSrc === defaultImage || imageSrc.slice(0, 5) !== "https") {
+            alert("A thumbnail image is needed");
+            return;
+        }
+        if (categories.length <= 0) {
+            alert("Select a category");
+            return;
+        }
+
+        const data = {
+            title: title,
+            author: author.name,
+            categories: categories,
+            description: desc,
+            content: contentMD,
+            thumbnailSource: imageSrc,
+            thumbnailAlt: thumbnailAlt,
+        };
+        console.log(data);
+
+        // add post
+        const endpoint = "/api/article/addArticle";
+        const JSONdata = JSON.stringify(data);
+
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+            },
+            body: JSONdata,
+        }
+
+        const response = await fetch(endpoint, options);
+        const result = await response.json();
+
+        console.log(result);
+        if (!response.ok) {
+            alert(result.error);
+            return;
+        }
+
+        // update categories
+        const data2 = {
+            post_id: result.article._id,
+            categories: categories,
+        };
+        const endpoint2 = "/api/article/updateCategory";
+        const JSONdata2 = JSON.stringify(data2);
+        const options2 = {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+            },
+            body: JSONdata2,
+        };
+
+        const response2 = await fetch(endpoint2, options2);
+        const result2 = await response2.json();
+
+        console.log(result2);
+        if (!response2.ok) {
+            alert(result2.error);
+            return;
+        }
+
+        // delete draft
+        const endpoint3 = "/api/article/deleteDraft";
+        const data3 = {
+            draft_id: draft._id,
+        };
+        const JSONdata3 = JSON.stringify(data3);
+        const options3 = {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+            },
+            body: JSONdata3,
+        };
+
+        const response3 = await fetch(endpoint3, options3);
+        const result3 = await response3.json();
+
+        console.log(result3);
+        if (response3.ok) {
+            alert("New Post added successfully");
+            router.push("/write/");
+        } else {
+            alert(result3.error);
+            return;
+        }
+    }
+
     return(
         <div>
             <Head>
@@ -297,7 +364,7 @@ export default function NewPost({ draft, author, allCategories }) {
                             <button onClick={handleDelete} className="px-3 py-2 text-center rounded-lg w-fit text-sm md:text-lg bg-red-300 dark:bg-red-700 font-semibold">DELETE</button>
                             <div>
                                 <button onClick={handleSave} className="mr-3 px-3 py-2 text-center rounded-lg w-fit text-sm md:text-lg bg-orange-200 dark:bg-zinc-800 font-semibold">SAVE</button>
-                                <button className="px-3 py-2 text-center rounded-lg w-fit text-sm md:text-lg bg-orange-200 dark:bg-zinc-800 font-semibold">PUBLISH</button>
+                                <button onClick={handlePublish} className="px-3 py-2 text-center rounded-lg w-fit text-sm md:text-lg bg-orange-200 dark:bg-zinc-800 font-semibold">PUBLISH</button>
                             </div>
                         </div>
                         <div className="my-4">
