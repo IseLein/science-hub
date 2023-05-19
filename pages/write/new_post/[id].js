@@ -234,7 +234,6 @@ export default function NewPost({ draft, author, allCategories }) {
                 },
                 body: JSONdata,
             };
-            console.log(options);
             const response = await fetch(endpoint, options);
             const result = await response.json();
 
@@ -243,6 +242,41 @@ export default function NewPost({ draft, author, allCategories }) {
             } else {
                 alert(result.error);
             }
+        }
+    }
+
+    const handleDelete = async() => {
+        if (draft === "new") {
+            alert("Draft not saved");
+            return;
+        }
+
+        const confirmed = window.confirm("Are you sure you want to delete this draft");
+        if (!confirmed) {
+            return
+        }
+
+        const endpoint = "/api/article/deleteDraft";
+        const data = {
+            draft_id: draft._id,
+        };
+        const JSONdata = JSON.stringify(data);
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+            },
+            body: JSONdata,
+        };
+
+        const response = await fetch(endpoint, options);
+        const result = await response.json();
+
+        if (response.ok) {
+            alert("Draft is deleted");
+            router.push("/write/");
+        } else {
+            alert(result.error);
         }
     }
 
@@ -259,9 +293,12 @@ export default function NewPost({ draft, author, allCategories }) {
             {session &&
                 <div className="text-amber-900 dark:text-orange-300">
                     <div className="px-5 md:px-40 lg:px-72 2xl:px-[25rem] lg:text-xl">
-                        <div className="flex flex-row justify-end">
-                            <button onClick={handleSave} className="mr-3 px-3 py-2 text-center rounded-lg w-fit text-sm md:text-lg bg-orange-200 dark:bg-zinc-800 font-semibold">SAVE</button>
-                            <button className="px-3 py-2 text-center rounded-lg w-fit text-sm md:text-lg bg-orange-200 dark:bg-zinc-800 font-semibold">PUBLISH</button>
+                        <div className="flex flex-row justify-between">
+                            <button onClick={handleDelete} className="px-3 py-2 text-center rounded-lg w-fit text-sm md:text-lg bg-red-300 dark:bg-red-700 font-semibold">DELETE</button>
+                            <div>
+                                <button onClick={handleSave} className="mr-3 px-3 py-2 text-center rounded-lg w-fit text-sm md:text-lg bg-orange-200 dark:bg-zinc-800 font-semibold">SAVE</button>
+                                <button className="px-3 py-2 text-center rounded-lg w-fit text-sm md:text-lg bg-orange-200 dark:bg-zinc-800 font-semibold">PUBLISH</button>
+                            </div>
                         </div>
                         <div className="my-4">
                             <input type="text" id="title"

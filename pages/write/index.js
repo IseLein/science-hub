@@ -124,8 +124,8 @@ export default function Write({ author, articles, drafts }) {
                         <div className="grid grid-cols-1">
                             {drafts.length <= 0 &&
                                 <div className="py-4 text-center md:text-lg 2xl:text-2xl font-fira-mono">
-                                    <div>The first draft of anything is sh*t - Ernest Hemingway</div>
-                                    <div>{"Pump out some first drafts and clarify your thoughts about stuff"}</div>
+                                    <div>{'"The first draft of anything is sh*t" - Ernest Hemingway'}</div>
+                                    <div>{"Pump out some first drafts and clarify your thoughts about stuff :)"}</div>
                                 </div>
                             }
                             {drafts.map((draft) => (
@@ -135,8 +135,11 @@ export default function Write({ author, articles, drafts }) {
                                             <div className="font-semibold md:text-lg lg:text-3xl 2xl:text-4xl">
                                                 {draft.title}
                                             </div>
-                                            <div className="md:text-lg 2xl:text-2xl text-amber-800 dark:text-orange-200">
-                                                {"Last updated: " + draft.updatedAt}
+                                            <div className="py-2 font-thin md:text-lg 2xl:text-2xl text-amber-800 dark:text-orange-200">
+                                                {draft.description}
+                                            </div>
+                                            <div className="xl:text-lg">
+                                                {"Last updated: " + draft.updatedAt.slice(0, 10)}
                                             </div>
                                         </div>
                                     </Link>
