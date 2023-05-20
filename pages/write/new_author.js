@@ -132,7 +132,9 @@ export default function NewPost() {
             }
             {!session &&
                 <div className="pt-28">
-                    <SignInOut />
+                    <div className="flex flex-row justify-center">
+                        <SignInOut />
+                    </div>
                 </div>
             }
             <Footer />
